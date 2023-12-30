@@ -3,7 +3,7 @@ import os
 import numpy as np
 import torch
 from typing import List, Union
-from einops import rearrange, repeat
+from einops import rearrange
 from imwatermark import WatermarkEncoder
 from omegaconf import ListConfig, OmegaConf
 from PIL import Image
@@ -42,7 +42,7 @@ class WatermarkEmbedder:
         for k in range(image_np.shape[0]):
             image_np[k] = self.encoder.encode(image_np[k], "dwtDct")
         image = torch.from_numpy(rearrange(image_np[:, :, :, ::-1], "(n b) h w c -> n b c h w", n = n)).to(image.device)
-        image = torch.clamp(image / 255, min=0.0, max=1.0)
+        image = torch.clamp(image / 255, min = 0.0, max = 1.0)
         if squeeze:
             image = image[0]
         return image
