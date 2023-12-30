@@ -23,16 +23,16 @@ from .discretization import (Img2ImgDiscretizationWrapper,
                                          Txt2NoisyDiscretizationWrapper)
 from ..util.detection.nsfw_and_watermark_dectection import \
     DeepFloydDataFiltering
-from ....sgm.inference.helpers import embed_watermark
-from ....sgm.modules.diffusionmodules.guiders import (LinearPredictionGuider,
+from sgm.inference.helpers import embed_watermark
+from sgm.modules.diffusionmodules.guiders import (LinearPredictionGuider,
                                                   VanillaCFG)
-from ....sgm.modules.diffusionmodules.sampling import (DPMPP2MSampler,
+from sgm.modules.diffusionmodules.sampling import (DPMPP2MSampler,
                                                    DPMPP2SAncestralSampler,
                                                    EulerAncestralSampler,
                                                    EulerEDMSampler,
                                                    HeunEDMSampler,
                                                    LinearMultistepSampler)
-from ....sgm.util import append_dims, default, instantiate_from_config
+from sgm.util import append_dims, default, instantiate_from_config
 
 
 @st.cache_resource()

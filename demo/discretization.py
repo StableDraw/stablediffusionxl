@@ -1,7 +1,6 @@
 import torch
 
-from ....sgm.modules.diffusionmodules.discretizer import Discretization
-
+from sgm.modules.diffusionmodules.discretizer import Discretization
 
 class Img2ImgDiscretizationWrapper:
     """

@@ -12,8 +12,8 @@ from torch import autocast
 
 from ..util.detection.nsfw_and_watermark_dectection import DeepFloydDataFiltering
 from .discretization import (Img2ImgDiscretizationWrapper, Txt2NoisyDiscretizationWrapper)
-from ....sgm.modules.diffusionmodules.sampling import (DPMPP2MSampler, DPMPP2SAncestralSampler, EulerAncestralSampler, EulerEDMSampler, HeunEDMSampler, LinearMultistepSampler)
-from ....sgm.util import append_dims, instantiate_from_config
+from sgm.modules.diffusionmodules.sampling import (DPMPP2MSampler, DPMPP2SAncestralSampler, EulerAncestralSampler, EulerEDMSampler, HeunEDMSampler, LinearMultistepSampler)
+from sgm.util import append_dims, instantiate_from_config
 
 class WatermarkEmbedder:
     def __init__(self, watermark):
