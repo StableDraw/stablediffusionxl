@@ -5,8 +5,10 @@ import numpy as np
 import torch
 import torchvision.transforms as T
 from PIL import Image
+from os.path import abspath
 
-RESOURCES_ROOT = "stablediffusionxl/util/detection/"
+root_file = abspath(__file__)
+RESOURCES_ROOT = root_file[0:root_file.rfind("\\")]
 
 
 def predict_proba(X, weights, biases):
@@ -18,7 +20,7 @@ def predict_proba(X, weights, biases):
 
 
 def load_model_weights(path: str):
-    model_weights = np.load(path)
+    model_weights = np.load(os.path.join(RESOURCES_ROOT, path))
     return model_weights["weights"], model_weights["biases"]
 
 
@@ -46,12 +48,8 @@ class DeepFloydDataFiltering(object):
         self.clip_model, _ = clip.load("ViT-L/14", device=device)
         self.clip_model.eval()
 
-        self.cpu_w_weights, self.cpu_w_biases = load_model_weights(
-            os.path.join("w_head_v1.npz")
-        )
-        self.cpu_p_weights, self.cpu_p_biases = load_model_weights(
-            os.path.join("p_head_v1.npz")
-        )
+        self.cpu_w_weights, self.cpu_w_biases = load_model_weights("w_head_v1.npz")
+        self.cpu_p_weights, self.cpu_p_biases = load_model_weights("p_head_v1.npz")
         self.w_threshold, self.p_threshold = 0.5, 0.5
 
     @torch.inference_mode()
