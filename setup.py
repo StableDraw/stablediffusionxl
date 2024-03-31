@@ -84,6 +84,7 @@ if __name__ == '__main__':
         author_email='devops@stability.ai',
         url='https://github.com/StableDraw/stablediffusionxl',
         include_package_data=True,
+        package_data={'': ['*.yaml', '*.npz']},
         long_description=readme(),
         long_description_content_type='text/markdown',
         packages=find_packages(include=[
