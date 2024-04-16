@@ -103,7 +103,7 @@ def load_img(binary_data, max_dim):
     return image
 
 def prepare(opt):
-    version_dict = VERSION2SPECS[opt["version"]]
+    version_dict = VERSION2SPECS[opt["models"]]
     set_lowvram_mode(opt["low_vram_mode"])
     seed_everything(opt["seed"])
     state = init_st(opt = opt, version_dict = version_dict, load_filter = opt["use_filter"])
@@ -116,7 +116,7 @@ def prepare(opt):
     finish_denoising = False
     state2 = None
     sampler2 = None
-    if opt["version"].startswith("SDXL-base") and opt["refiner"] != "":
+    if opt["models"].startswith("SDXL-base") and opt["refiner"] != "":
         add_pipeline = True
         state2 = init_st(opt = opt, version_dict = VERSION2SPECS[opt["refiner"]], load_filter = False)
         stage2strength = opt["refinement_strength"]
@@ -152,7 +152,7 @@ def postprocessing(opt, prompt, state, finish_denoising, out, add_pipeline, stat
     return r
 
 def apply_refiner(opt, input, state, sampler, num_samples, prompt, filter = None, finish_denoising = False):
-    version_dict = VERSION2SPECS[opt["version"]]
+    version_dict = VERSION2SPECS[opt["models"]]
     init_dict = {"orig_width": input.shape[3] * opt["m_k"], "orig_height": input.shape[2] * opt["m_k"], "target_width": input.shape[3] * opt["m_k"], "target_height": input.shape[2] * opt["m_k"]}
     value_dict = init_dict
     value_dict["prompt"] = prompt
